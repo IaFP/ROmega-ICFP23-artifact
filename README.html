@@ -1,0 +1,245 @@
+<h1
+id="generic-programming-with-extensible-data-types-or-making-ad-hoc-extensible-data-types-less-ad-hoc">Generic
+Programming with Extensible Data Types; Or, Making Ad Hoc Extensible
+Data Types Less Ad Hoc</h1>
+<h2 id="brief-artifact-description">Brief Artifact Description</h2>
+<p>Our artifact is an Agda library rooted under <a
+href="./ROmega">./ROmega</a>. We also provide HTML documentation under
+<a href="./html/">./html/</a>. The development consists principally of
+the following components:</p>
+<ul>
+<li><strong>An intrinsic mechanization of Rω</strong>, the calculus
+introduced by §4. By “intrinsic”, we mean that untyped terms and
+unkinded types have no meaning. So our ASTs are of <em>kinding and
+typing derivations</em>, not of <em>types</em> and <em>terms</em>,
+respectively. The syntax and semantics of each judgment introduced in §4
+are modularly housed in their own folders—e.g., <a
+href="ROmega/Types/Syntax.agda">ROmega.Types.Syntax</a> gives the AST
+for kinding derivations. For a full description of each module, see the
+<a href="#library-structure">Library Structure</a> below.</li>
+<li><strong>A formalization of the Index Calculus</strong>, which we
+give as semantics for Rω (§5). This is housed in <a
+href="./ROmega/IndexCalculus">ROmega.IndexCalculus</a>.</li>
+<li><strong>A Denotation of Rω into the Index Calculus</strong>. This is
+housed in each Rω component folder’s <code>Semantics.agda</code>,
+e.g. the denotation of types is given in <a
+href="./ROmega/Types/Semantics.agda">ROmega.Types.Semantics</a>.</li>
+</ul>
+<p>A full description of each module is given <a
+href="#library-structure">below</a>.</p>
+<h1 id="building-from-source">Building From Source</h1>
+<ul>
+<li>If not done so already, install Agda according to the instructions
+relevant for your operating system. <a
+href="https://agda.readthedocs.io/en/latest/getting-started/installation.html">Instructions
+here</a>.</li>
+<li>As per Step 4 of the Agda installation instructions, you must
+<strong>install the Agda Standard Library</strong>. <a
+href="https://github.com/agda/agda-stdlib/blob/master/notes/installation-guide.md">Instructions
+here</a>.</li>
+<li>The development is housed under <a href="./ROmega/">./ROmega/</a>.
+<a href="./ROmega/All.agda">ROmega.All</a> imports <strong>all</strong>
+modules; you may thus verify that all files type check by type checking
+<code>All.agda</code>.</li>
+</ul>
+<p>The artifact was built &amp; written using <strong>Agda version
+2.6.2.2</strong> and the <strong>Agda standard library version
+1.7.1</strong>. As of this writing, the latest versions are 2.6.2.4 and
+1.7.2, respectively. Our development will work (and has been tested)
+with these latest versions.</p>
+<h1 id="additional-artifact-description">Additional Artifact
+Description</h1>
+<h2 id="example-derivations">Example Derivations</h2>
+<p>The following examples of the paper were mechanized in <a
+href="./ROmega/Examples/Section-3.agda">ROmega.Examples.Section-3</a>.</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Section</th>
+<th style="text-align: center;">Paper Location</th>
+<th style="text-align: center;">Line Location</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">3.1</td>
+<td style="text-align: center;"><code>sel</code>, in ¶.</td>
+<td style="text-align: center;">58</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">3.1</td>
+<td style="text-align: center;"><code>con</code>, in ¶.</td>
+<td style="text-align: center;">80</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3.1</td>
+<td style="text-align: center;"><code>case</code>, in ¶.</td>
+<td style="text-align: center;">114</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">3.1</td>
+<td style="text-align: center;"><code>ifte</code>, in ¶.</td>
+<td style="text-align: center;">147</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3.2</td>
+<td style="text-align: center;"><code>reify</code> and
+<code>reflect</code>, in Figure 3.</td>
+<td style="text-align: center;">175, 229</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">3.2</td>
+<td style="text-align: center;"><code>map-π</code> and
+<code>map-Σ</code>, in figure 4.</td>
+<td style="text-align: center;">331, 396</td>
+</tr>
+</tbody>
+</table>
+<h2 id="library-structure">Library Structure</h2>
+<p>We offer a full description of each folder and file, for
+reference.</p>
+<p><a href="./ROmega/All.agda">ROmega.All</a> imports
+<strong>all</strong> modules. Files and folders are named as the Agda
+std-lib does, e.g., <code>ROMega.Foobar</code> simply exports the
+contents of the (base) files within <code>ROmega.Foobar.*</code>.
+Theorems and lemmas of module <code>Foobar</code> are named
+<code>Foobar.Properties.agda</code>.</p>
+<h3 id="indexcalculus">./IndexCalculus/</h3>
+<p>System Rω <em>denotes into</em> a subset of Agda which we term the
+Index Calculus (see §5). So, this directory houses the semantic image of
+Rω.</p>
+<ul>
+<li><a
+href="./ROmega/IndexCalculus/Rows.agda">ROmega.IndexCalculus.Rows</a>.
+Definition of rows and row evidence.</li>
+<li><a
+href="./ROmega/IndexCalculus/Records.agda">ROmega.IndexCalculus.Records</a>.
+Definition of records.</li>
+<li><a
+href="./ROmega/IndexCalculus/Variants.agda">ROmega.IndexCalculus.Variants</a>.
+Definition of variants.</li>
+<li><a
+href="./ROmega/IndexCalculus/Properties.agda">ROmega.IndexCalculus.Properties</a>.
+Properties of rows – in particular, that <code>ρ pick i</code> and
+<code>ρ delete i</code> can be recombined into <code>ρ</code>.</li>
+</ul>
+<h3 id="postulates">./Postulates/</h3>
+<p>We postulate functional extensionality in <a
+href="./ROmega/Postulates/FunExt.agda">ROmega.Postulates.FunExt</a>.</p>
+<h3 id="lib">./Lib/</h3>
+<p>Common utility is placed in <a href="./ROmega/Lib">ROmega.Lib</a>. We
+define <code>≡-elim</code> in <a
+href="./ROmega/Lib/Equality.agda">.ROmega.Lib.Equality</a>, which we use
+when rewriting is inconvenient or not possible (e.g., in a let
+statement).</p>
+<h3 id="kinds">./Kinds/</h3>
+<ul>
+<li><a href="./ROmega/Kinds/Syntax.agda">ROmega.Kinds.Syntax</a>. The
+syntax of level stratified kinds.</li>
+<li><a href="./ROmega/Kinds/Semantics.agda">ROmega.Kinds.Semantics</a>.
+The denotation of Rω kinds into Agda types.</li>
+</ul>
+<h3 id="types">./Types/</h3>
+<ul>
+<li><a href="./ROmega/Types/Syntax.agda">ROmega.Types.Syntax</a>. The
+intrinsically-kinded AST representation of (stratified) kinding
+derivations.</li>
+<li><a href="./ROmega/Types/Semantics.agda">ROmega.Types.Semantics</a>.
+Denotation of kinding derivations into Agda.</li>
+<li><a
+href="./ROmega/Types/Substitution.agda">ROmega.Types.Substitution</a>.
+Definition of renaming &amp; substitution. This is necessary because,
+although we denote Rω <em>terms</em> into Agda, we still have
+(operational) β-reduction at the type level.</li>
+<li><a
+href="./ROmega/Types/Substitution/Properties.agda">ROmega.Types.Substitution.Properties</a>.
+Weakening &amp; substitution lemmas for type-level β-reduction.</li>
+</ul>
+<h3 id="terms">./Terms/</h3>
+<ul>
+<li><a href="./ROmega/Terms/Syntax.agda">ROmega.Terms.Syntax</a>. The
+intrinsically-typed AST representation of typing derivations.</li>
+<li><a href="./ROmega/Terms/Semantics.agda">ROmega.Terms.Semantics</a>.
+Denotation of typing derivations into Agda.</li>
+</ul>
+<h3 id="equivalence">./Equivalence/</h3>
+<ul>
+<li><a
+href="./ROmega/Equivalence/Syntax.agda">ROmega.Equivalence.Syntax</a>.
+The AST of type (and predicate) equivalence.</li>
+<li><a
+href="./ROmega/Equivalence/Semantics.agda">ROmega.Equivalence.Semantics</a>.
+Denotation of type equivalence into propositional equality in Agda.</li>
+</ul>
+<h3 id="entailment">./Entailment/</h3>
+<ul>
+<li><a
+href="./ROmega/Entailment/Syntax.agda">ROmega.Entailment.Syntax</a>. The
+AST of predicate entailment.</li>
+<li><a
+href="./ROmega/Entailment/Semantics.agda">ROmega.Entailment.Semantics</a>.
+Denotation of predicate entailment into evidence in the Index
+Calculus.</li>
+<li><a
+href="./ROmega/Entailment/Reasoning.agda">ROmega.Entailment.Reasoning</a>.
+Helper library, á la the <a
+href="https://github.com/agda/agda-stdlib/blob/master/src/Relation/Binary/PropositionalEquality/Core.agda#L103">std-lib</a>,
+for constructing inhabitants of the entailment relation.</li>
+</ul>
+<h3 id="examples">./Examples/</h3>
+<ul>
+<li><a
+href="./ROmega/Examples/Section-3.agda">ROmega.Examples.Section-3</a>.
+Example typing derivations indexed with respect to their placement in
+section 3 of the text</li>
+</ul>
+<h2 id="paper-mechanization-differences">Paper &amp; Mechanization
+Differences</h2>
+<p>The presentation of Rω in our paper and in the mechanization differ
+in the following ways.</p>
+<ul>
+<li><p><strong>Conversion of Singletons and Records/Variants.</strong>
+The paper’s type system makes use of the rule (E-SING) to state that
+singletons, singleton records, and singleton variants are all
+equivalent. In the mechanization, we move this capability to the typing
+rules (rules <code>Σ</code>, <code>Σ⁻¹</code>, <code>Π</code>, and
+<code>Π⁻¹</code> in <code>ROmega.Terms.(Syntax|Semantics).agda</code>).
+This does not really affect the expressivity of the language: it is
+effectively an explicit cast system instead of implicit coercion.</p>
+<p>We made this decision simply so that the equivalence relation could
+denote into propositional equality:</p>
+<pre><code>  ⟦_⟧eq : τ ≡t υ → (H : ⟦Δ ⟧ke) → ⟦ τ ⟧t H ≡ ⟦ υ ⟧t H</code></pre>
+<p>This definition holds for all other equivalence rules. However, in
+the denotation of terms, the singleton (ℓ ▹ M) denotes to ⟦ M ⟧, but the
+record Π (ℓ ▹ M) denotes to an index calculus record. <em>These two are
+isomorphic,</em> but not propositionally equal. Consequently, we decided
+to adopt explicit coercions in the mechanization so as to make the
+equivalence relation’s denotation stronger—again, without real cost to
+the expressivity of Rω.</p></li>
+<li><p><strong>Multi-rows</strong>. The revised submission includes
+<code>{ τ₁ , ... , τₙ }</code> in the syntax of types. However, such
+rows will not type in the minimal row theory, which we only implement.
+So they were omitted from the mechanization’s syntax of types purely for
+convenience.<br />
+</p></li>
+<li><p><strong>Records and Variants of higher kind.</strong> The paper
+permits records and variants to be constructed from rows of higher kind
+(rules (K-Π) and (K-Σ), resp.). However, the mechanization is more
+restrictive: you may only construct a record/variant from a term of star
+kind. We discuss this in §5.2 of the paper: “we have made one
+simplification relative to Rω: we implement records and variants only at
+the base kind, and express the type constructor variants using type
+functions. This does not reflect a fundamental limitation in our
+embedding, but simply a choice made for expediency in development.” I
+should add here that the trick is rather simple: if ρ : R [ ⋆ → ⋆ ], for
+example, then instead of Π ρ we can write (λ s : ⋆. Π (ρ ·⌈ s
+⌉)).</p></li>
+<li><p><strong>Parameterization by row theories.</strong> Rω is and can
+be indexed parametrically by multiple row theories, but our
+mechanization is restricted to just the minimal row theory. This is
+relayed to the reader in section 5. We provide some evidence in favor of
+parameteriziation of the mechanization by way of parameterizing the hard
+bit (the entailment relation). However, we do not provide an
+instantiation for any theory but the minimal row theory, and we do not
+explicitly parameterize the kinding and equivalence relations.</p></li>
+</ul>
