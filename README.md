@@ -26,7 +26,7 @@ A full description of each module is given
 [below](#library-structure).
 
 
-# Building From Source
+## Installation
 
 - If not done so already, install Agda according to the instructions relevant
   for your operating system. [Instructions
@@ -43,8 +43,6 @@ standard library version 1.7.1**. As of this writing, the latest versions are
 2.6.2.4 and 1.7.2, respectively. Our development will work (and has been tested)
 with these latest versions.
 
-
-# Additional Artifact Description
 
 ## Example Derivations
 
